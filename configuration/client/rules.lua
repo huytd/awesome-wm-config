@@ -29,20 +29,9 @@ awful.rules.rules = {
       maximized_vertical = false
     }
   },
-  -- Titlebars
-  {
-    rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}},
-    properties = {
-      placement = awful.placement.centered,
-      ontop = true,
-      floating = true,
-      drawBackdrop = true,
-      shape = function()
-        return function(cr, w, h)
-          gears.shape.rounded_rect(cr, w, h, 8)
-        end
-      end,
-      skip_decoration = true
-    }
-  }
+
+  -- Add titlebars to normal clients and dialogs
+  { rule_any = {type = { "normal", "dialog" }
+    }, properties = { titlebars_enabled = true }
+  },
 }

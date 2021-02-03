@@ -1,6 +1,50 @@
 local awful = require('awful')
 local gears = require('gears')
 local beautiful = require('beautiful')
+local wibox = require("wibox")
+
+local function setupTitlebar(client)
+  -- buttons for the titlebar
+  local buttons = gears.table.join(
+  awful.button({ }, 1, function()
+    client:emit_signal("request::activate", "titlebar", {raise = true})
+    awful.mouse.client.move(client)
+  end),
+  awful.button({ }, 3, function()
+    client:emit_signal("request::activate", "titlebar", {raise = true})
+    awful.mouse.client.resize(client)
+  end)
+  )
+
+  awful.titlebar(client, {
+    bg_normal = '#eeeeee',
+    bg_focus = '#ffffff',
+    fg = '#333333'
+  }) : setup {
+    { -- Left
+    awful.titlebar.widget.iconwidget(client),
+    buttons = buttons,
+    layout  = wibox.layout.fixed.horizontal
+  },
+  { -- Middle
+  { -- Title
+  align  = "center",
+  widget = awful.titlebar.widget.titlewidget(client)
+},
+buttons = buttons,
+layout  = wibox.layout.flex.horizontal
+        },
+        { -- Right
+        awful.titlebar.widget.floatingbutton (client),
+        awful.titlebar.widget.maximizedbutton(client),
+        awful.titlebar.widget.stickybutton   (client),
+        awful.titlebar.widget.ontopbutton    (client),
+        awful.titlebar.widget.closebutton    (client),
+        layout = wibox.layout.fixed.horizontal()
+      },
+      layout = wibox.layout.align.horizontal
+    }
+  end
 
 local function renderClient(client, mode)
   if client.skip_decoration or (client.rendering_mode == mode) then
@@ -16,19 +60,10 @@ local function renderClient(client, mode)
   client.sticky = false
   client.maximized_horizontal = false
   client.maximized_vertical = false
+  client.border_width = 3
 
-  if client.rendering_mode == 'maximized' then
-    client.border_width = 0
-    client.shape = function(cr, w, h)
-      gears.shape.rectangle(cr, w, h)
-    end
-  elseif client.rendering_mode == 'tiled' then
---      client.border_width = beautiful.border_width
-      client.border_width = 3
-    client.shape = function(cr, w, h)
-      gears.shape.rectangle(cr, w, h)
-    end
-
+  client.shape = function(cr, w, h)
+    gears.shape.rounded_rect(cr, w, h, 10)
   end
 end
 
@@ -92,6 +127,9 @@ _G.client.connect_signal('property::hidden', clientCallback)
 
 _G.client.connect_signal('property::minimized', clientCallback)
 
+-- Add a titlebar if titlebars_enabled is set to true in the rules.
+_G.client.connect_signal("request::titlebars", setupTitlebar)
+
 _G.client.connect_signal(
   'property::fullscreen',
   function(c)
@@ -106,3 +144,4 @@ _G.client.connect_signal(
 _G.tag.connect_signal('property::selected', tagCallback)
 
 _G.tag.connect_signal('property::layout', tagCallback)
+
