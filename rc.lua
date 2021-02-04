@@ -23,24 +23,6 @@ require('configuration.client')
 require('configuration.tags')
 _G.root.keys(require('configuration.keys.global'))
 
--- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(
-  function(s)
-    -- If wallpaper is a function, call it with the screen
-    if beautiful.wallpaper then
-        if type(beautiful.wallpaper) == "string" then
-            if beautiful.wallpaper:sub(1, #"#") == "#" then
-                gears.wallpaper.set(beautiful.wallpaper)
-            elseif beautiful.wallpaper:sub(1, #"/") == "/" then
-                gears.wallpaper.maximized(beautiful.wallpaper, s)
-            end
-        else
-            beautiful.wallpaper(s)
-        end
-    end
-  end
-)
-
 -- Signal function to execute when a new client appears.
 _G.client.connect_signal(
   'manage',
