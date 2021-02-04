@@ -4,7 +4,7 @@ return {
   --tags
   chrome = dir .. '/google-chrome.svg',
   firefox = dir .. '/firefox.svg',
-  console = dir .. '/console.svg',  
+  console = dir .. '/console.svg',
   code = dir .. '/code-braces.svg',
   social = dir .. '/forum.svg',
   folder = dir .. '/folder.svg',
@@ -13,6 +13,7 @@ return {
   lab = dir .. '/flask.svg',
   --others
   menu = dir .. '/menu.svg',
+  fire = dir .. '/fire.svg',
   close = dir .. '/close.svg',
   logout = dir .. '/logout.svg',
   sleep = dir .. '/power-sleep.svg',

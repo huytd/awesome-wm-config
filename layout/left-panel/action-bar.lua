@@ -11,8 +11,8 @@ local clickable_container = require('widget.material.clickable-container')
 return function(screen, panel, action_bar_width)
   local menu_icon =
     wibox.widget {
-    icon = icons.menu,
-    size = dpi(24),
+    icon = icons.fire,
+    size = dpi(14),
     widget = mat_icon,
   }
 
@@ -51,7 +51,7 @@ return function(screen, panel, action_bar_width)
   panel:connect_signal(
     'closed',
     function()
-      menu_icon.icon = icons.menu
+      menu_icon.icon = icons.fire
       home_button.visible = true
     end
   )
