@@ -64,7 +64,7 @@ local function renderClient(client, mode)
   client.border_width = 1
 
   client.shape = function(cr, w, h)
-    gears.shape.rounded_rect(cr, w, h, 10)
+    gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
   end
 end
 

@@ -13,7 +13,7 @@ local left_panel = function(screen)
     wibox {
     screen = screen,
     shape = function(cr, w, h)
-      gears.shape.rounded_rect(cr, w, h, 10)
+      gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
     end,
     width = dpi(32),
     height = dpi(32),

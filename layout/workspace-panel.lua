@@ -23,7 +23,7 @@ local WorkspacePanel = function(s, offset)
       ontop = false,
       screen = s,
       shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 10)
+        gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
       end,
       height = dpi(32),
       width = dpi(150),

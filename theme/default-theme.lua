@@ -7,6 +7,8 @@ local theme = {}
 theme.icons = theme_dir .. '/icons/'
 theme.font = 'Roboto medium 10'
 
+theme.border_radius = dpi(10)
+
 -- Colors Pallets
 
 -- Primary

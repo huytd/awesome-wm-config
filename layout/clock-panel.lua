@@ -33,7 +33,7 @@ local ClockPanel = function(s, offset)
     {
       ontop = false,
       shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, 10)
+        gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
       end,
       screen = s,
       height = dpi(32),
