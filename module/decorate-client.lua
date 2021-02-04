@@ -60,7 +60,8 @@ local function renderClient(client, mode)
   client.sticky = false
   client.maximized_horizontal = false
   client.maximized_vertical = false
-  client.border_width = 3
+  -- client.border_width = 3
+  client.border_width = 1
 
   client.shape = function(cr, w, h)
     gears.shape.rounded_rect(cr, w, h, 10)

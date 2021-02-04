@@ -26,9 +26,7 @@ return {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
-     -- Add applications that need to be killed between reloads
-    -- to avoid multipled instances, inside the awspawn script
-    'compton --config ' .. filesystem.get_configuration_dir() .. '/configuration/compton.conf',
+    'picom --config ' .. filesystem.get_configuration_dir() .. '/configuration/compton.conf',
     'feh --bg-fill --randomize ~/Pictures/Wallpapers/*',
     'nm-applet --indicator', -- wifi
     'xfce4-power-manager', -- Power manager

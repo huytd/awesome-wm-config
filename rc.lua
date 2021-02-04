@@ -44,12 +44,14 @@ _G.client.connect_signal(
 _G.client.connect_signal(
   'focus',
   function(c)
-    c.border_color = beautiful.border_focus
+    -- c.border_color = beautiful.border_focus
+    c.border_color = '#dedede'
   end
 )
 _G.client.connect_signal(
   'unfocus',
   function(c)
-    c.border_color = beautiful.border_normal
+    -- c.border_color = beautiful.border_normal
+    c.border_color = '#dedede'
   end
 )
