@@ -8,7 +8,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 
 local icons = require('theme.icons')
 
-local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%d.%m.%Y\n     %H:%M</span>')
+local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 9">%a %m/%d/%Y</span>')
 
 local month_calendar = awful.widget.calendar_popup.month({
   screen = s,
@@ -34,8 +34,8 @@ local DatePanel = function(s, offset)
       end,
       screen = s,
       height = dpi(32),
-      width = dpi(100),
-      x = s.geometry.width - dpi(150),
+      width = dpi(128),
+      x = s.geometry.width - dpi(180),
       y = s.geometry.y  + offsety,
       stretch = false,
       bg = beautiful.primary.hue_900,

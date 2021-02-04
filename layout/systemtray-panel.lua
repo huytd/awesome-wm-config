@@ -14,7 +14,7 @@ local icons = require('theme.icons')
 
 local systray = wibox.widget.systray()
 systray:set_horizontal(true)
-systray:set_base_size(32)
+systray:set_base_size(24)
 
 local TopPanel = function(s, offset)
   local offsetx = 0
@@ -32,7 +32,7 @@ local TopPanel = function(s, offset)
       screen = s,
       height = dpi(32),
       width = dpi(128),
-      x = s.geometry.width - dpi(350),
+      x = s.geometry.width - dpi(382),
       y = s.geometry.y  + offsety,
       stretch = false,
       bg = beautiful.primary.hue_900,
@@ -50,10 +50,8 @@ local TopPanel = function(s, offset)
   )
 
   panel:setup {
-      layout = wibox.layout.align.horizontal,
-	  wibox.container.margin(systray, dpi(4), dpi(4), dpi(4), dpi(4)),
-	  -- nil,
-	  -- require('widget.cpu'),
+    layout = wibox.layout.align.horizontal,
+    wibox.container.margin(systray, dpi(8), dpi(8), dpi(8), dpi(8)),
   }
 
   return panel
