@@ -130,8 +130,8 @@ local globalKeys =
     {description = 'open a terminal', group = 'launcher'}
   ),
   awful.key({modkey, 'Control'}, 'r', _G.awesome.restart, {description = 'reload awesome', group = 'awesome'}),
-  awful.key({modkey, 'Control'}, 'q', _G.awesome.quit, {description = 'quit awesome', group = 'awesome'}),
-  awful.key({modkey, 'Shift'}, 'p',
+  -- awful.key({modkey, 'Control'}, 'q', _G.awesome.quit, {description = 'quit awesome', group = 'awesome'}),
+  awful.key({modkey, 'Control'}, 'q',
             function()
                 _G.exit_screen_show()
             end,
