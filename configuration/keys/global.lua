@@ -21,6 +21,15 @@ local globalKeys =
   awful.key({modkey}, 'w', awful.tag.viewprev, {description = 'view previous', group = 'tag'}),
   awful.key({modkey}, 's', awful.tag.viewnext, {description = 'view next', group = 'tag'}),
   awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'go back', group = 'tag'}),
+  awful.key({modkey}, 'q',
+    function()
+      local c = _G.client.focus
+      if c then
+        c:kill()
+      end
+    end,
+    {description = 'view previous', group = 'tag'}
+  ),
   -- Main runner
   awful.key(
     {modkey},

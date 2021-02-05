@@ -8,10 +8,9 @@ local rofi_command = 'env /usr/bin/rofi -dpi ' .. get_dpi() .. ' -width ' .. wit
 return {
   -- List of apps to start by default on some actions
   default = {
-    terminal = 'gnome-terminal',
+    terminal = 'alacritty',
     rofi = rofi_command,
     lock = 'i3lock -p default -i ' .. os.getenv('HOME') .. '/Pictures/Wallpapers/forest-lock.png',
-    quake = 'gnome-terminal',
     screenshot = 'maim | xclip -selection clipboard -t image/png && notify-send "Screenshot saved to clipboard"',
     region_screenshot = 'maim -s | xclip -selection clipboard -t image/png && notify-send "Screenshot saved to clipboard"',
 

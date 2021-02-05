@@ -30,4 +30,17 @@ awful.rules.rules = {
   { rule_any = {type = { "normal", "dialog" }
     }, properties = { titlebars_enabled = true }
   },
+
+  -- Ignore title bar for Alacritty
+  { rule_any = { name = { "Alacritty" }
+    }, properties = { titlebars_enabled = false }
+  },
+
+  -- No decoratio for Conky
+  { rule_any = { name = { "conky" }
+    }, properties = {
+      titlebars_enabled = false,
+      skip_decoration = true
+    }
+  },
 }
