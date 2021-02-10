@@ -8,14 +8,14 @@ Mostly from [Redhound](https://github.com/Purhan/dotfiles/) with some personal m
 
 ### 1) Install the dependencies
 
-- AwesomeWM
-- Rofi
-- Compton
-- i3lock
-- xclip
-- maim (for screenshot)
-- lxappearance
-- playerctl (for global media control)
+- **AwesomeWM**
+- **Rofi**
+- **Compton**
+- **i3lock**
+- **xclip**
+- **maim** (for screenshot)
+- **lxappearance**
+- **playerctl** and **libplayerctl-dev** (for global media control)
 
 ### 2) Clone the configuration
 
