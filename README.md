@@ -2,7 +2,7 @@
 
 ![](screenshot.png)
 
-Mostly from [Redhound](https://github.com/Purhan/dotfiles/tree/master/RICE/redhound) with some personal modifications.
+Mostly from [Redhound](https://github.com/Purhan/dotfiles/) with some personal modifications.
 
 ## Installation
 
@@ -15,6 +15,7 @@ Mostly from [Redhound](https://github.com/Purhan/dotfiles/tree/master/RICE/redho
 - xclip
 - maim (for screenshot)
 - lxappearance
+- playerctl (for global media control)
 
 ### 2) Clone the configuration
 
@@ -42,9 +43,6 @@ QT_QPA_PLATFORMTHEME=gtk2
 
 ### Wallpapers and Lock Image
 
-Wallpaper and screen lock image are hard-coded to the path at:
+Put wallpapers in `$HOME/Pictures/Wallpapers`, they will be used as wallpapers and lock screen background.
 
-```
-Wallpaper: $HOME/Pictures/Wallpapers/forest.jpg
-Lock Image: $HOME/Pictures/Wallpapers/forest-lock.png
-```
+All only PNG files are used for lock screen.

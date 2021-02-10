@@ -298,9 +298,25 @@ local globalKeys =
     {},
     'XF86AudioNext',
     function()
-      --
+      awful.spawn('playerctl next')
     end,
-    {description = 'toggle mute', group = 'hotkeys'}
+    {description = 'next song', group = 'hotkeys'}
+  ),
+  awful.key(
+    {},
+    'XF86AudioPrev',
+    function()
+      awful.spawn('playerctl previous')
+    end,
+    {description = 'previous song', group = 'hotkeys'}
+  ),
+  awful.key(
+    {},
+    'XF86AudioPlay',
+    function()
+      awful.spawn('playerctl play-pause')
+    end,
+    {description = 'toggle play', group = 'hotkeys'}
   ),
   awful.key(
     {},

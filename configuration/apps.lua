@@ -1,5 +1,7 @@
 local filesystem = require('gears.filesystem')
 
+local HOME = os.getenv('HOME')
+
 -- Thanks to jo148 on github for making rofi dpi aware!
 local with_dpi = require('beautiful').xresources.apply_dpi
 local get_dpi = require('beautiful').xresources.get_dpi
@@ -10,7 +12,7 @@ return {
   default = {
     terminal = 'alacritty',
     rofi = rofi_command,
-    lock = 'i3lock -p default -i ' .. os.getenv('HOME') .. '/Pictures/Wallpapers/forest-lock.png',
+    lock = HOME .. '/.config/awesome/scripts/lock-computer',
     screenshot = 'maim | xclip -selection clipboard -t image/png && notify-send "Screenshot saved to clipboard"',
     region_screenshot = 'maim -s | xclip -selection clipboard -t image/png && notify-send "Screenshot saved to clipboard"',
 

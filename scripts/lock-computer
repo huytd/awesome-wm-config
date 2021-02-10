@@ -1,0 +1,3 @@
+#!/bin/bash
+FOUND=$(find ~/Pictures/Wallpapers/ -name "*.png" | shuf -n1)
+i3lock -p default -i $FOUND
