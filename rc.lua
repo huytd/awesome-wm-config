@@ -1,14 +1,10 @@
 local gears = require('gears')
 local awful = require('awful')
-local naughty = require('naughty')
 require('awful.autofocus')
 local beautiful = require('beautiful')
-local lgi = require("lgi")
 
 -- Theme
 beautiful.init(require('theme'))
-local icons = require('theme.icons')
-local dpi = require('beautiful').xresources.apply_dpi
 
 -- Layout
 require('layout')
@@ -59,22 +55,5 @@ _G.client.connect_signal(
   end
 )
 
--- Notify when song changed
-local Playerctl = lgi.Playerctl
-local player = Playerctl.Player{}
-local update_player_status = function()
-  if player.playback_status == "PLAYING" then
-    naughty.notify({
-      icon = icons.music,
-      icon_size = dpi(24),
-      text = player:get_title(),
-      ontop = true,
-      shape = function(cr, w, h)
-        gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
-      end,
-    })
-  end
-end
-player.on_metadata = update_player_status
-player.on_playback_status = update_player_status
-update_player_status()
+local musicNotify = require('module.music-notify')
+musicNotify()
