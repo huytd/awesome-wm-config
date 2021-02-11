@@ -146,6 +146,40 @@ local globalKeys =
             end,
   {description = 'end session menu', group = 'awesome'}),
 
+  -- Focus window by direction
+  awful.key({modkey, 'Shift'}, 'Right',
+    function()
+      awful.client.focus.bydirection('right')
+      if _G.client.focus then
+        _G.client.focus:raise()
+      end
+    end
+  ,{description = 'focus window on the right', group = 'client'}),
+  awful.key({modkey, 'Shift'}, 'Left',
+    function()
+      awful.client.focus.bydirection('left')
+      if _G.client.focus then
+        _G.client.focus:raise()
+      end
+    end
+  ,{description = 'focus window on the left', group = 'client'}),
+  awful.key({modkey, 'Shift'}, 'Up',
+    function()
+      awful.client.focus.bydirection('up')
+      if _G.client.focus then
+        _G.client.focus:raise()
+      end
+    end
+  ,{description = 'focus window on the up', group = 'client'}),
+  awful.key({modkey, 'Shift'}, 'Down',
+    function()
+      awful.client.focus.bydirection('down')
+      if _G.client.focus then
+        _G.client.focus:raise()
+      end
+    end
+  ,{description = 'focus window on the down', group = 'client'}),
+
   -- Move window with Mod + Arrow
   awful.key(
     {modkey}, 'Right',
