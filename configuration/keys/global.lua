@@ -228,7 +228,11 @@ local globalKeys =
     function()
       local c = _G.client.focus
       if c then
-        c:relative_move(0, 0, 40, 0)
+        if awful.layout.get(c.screen).name == "floating" or c.floating then
+          c:relative_move(0, 0, 40, 0)
+        else
+          awful.tag.incmwfact(0.05)
+        end
       end
     end,
     {description = 'Resize window right', group = 'layout'}
@@ -238,7 +242,11 @@ local globalKeys =
     function()
       local c = _G.client.focus
       if c then
-        c:relative_move(0, 0, -40, 0)
+        if awful.layout.get(c.screen).name == "floating" or c.floating then
+          c:relative_move(0, 0, -40, 0)
+        else
+          awful.tag.incmwfact(-0.05)
+        end
       end
     end,
     {description = 'Resize window left', group = 'layout'}
@@ -248,7 +256,11 @@ local globalKeys =
     function()
       local c = _G.client.focus
       if c then
-        c:relative_move(0, 0, 0, -40)
+        if awful.layout.get(c.screen).name == "floating" or c.floating then
+          c:relative_move(0, 0, 0, -40)
+        else
+          awful.client.incwfact(0.05)
+        end
       end
     end,
     {description = 'Resize window up', group = 'layout'}
@@ -258,7 +270,11 @@ local globalKeys =
     function()
       local c = _G.client.focus
       if c then
-        c:relative_move(0, 0, 0, 40)
+        if awful.layout.get(c.screen).name == "floating" or c.floating then
+          c:relative_move(0, 0, 0, 40)
+        else
+          awful.client.incwfact(-0.05)
+        end
       end
     end,
     {description = 'Resize window down', group = 'layout'}

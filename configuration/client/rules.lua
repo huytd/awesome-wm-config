@@ -32,7 +32,7 @@ awful.rules.rules = {
   },
 
   -- Ignore title bar for Alacritty
-  { rule_any = { name = { "Alacritty" }
+  { rule_any = { name = { "Alacritty", "Chrome" }
     }, properties = { titlebars_enabled = false }
   },
 

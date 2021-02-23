@@ -43,8 +43,6 @@ _G.client.connect_signal(
 _G.client.connect_signal(
   'focus',
   function(c)
-    -- c.border_color = beautiful.border_focus
-    -- c.border_color = '#dedede22'
     c.border_color = 'transparent'
   end
 )
