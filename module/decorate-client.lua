@@ -17,7 +17,7 @@ local function setupTitlebar(client)
   )
 
   awful.titlebar(client, {
-    bg_normal = '#eeeeee',
+    bg_normal = '#dddddd',
     bg_focus = '#ffffff',
     fg = '#333333'
   }) : setup {
