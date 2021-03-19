@@ -19,7 +19,7 @@ return {
     -- Editing these also edits the default program
     -- associated with each tag/workspace
     browser = 'env firefox',
-    editor = 'vim', -- gui text editor
+    editor = 'goneovim', -- gui text editor
     social = 'env slack',
     game = rofi_command,
     files = 'nautilus',

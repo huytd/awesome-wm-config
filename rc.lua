@@ -49,10 +49,6 @@ _G.client.connect_signal(
 _G.client.connect_signal(
   'unfocus',
   function(c)
-    -- c.border_color = beautiful.border_normal
     c.border_color = 'transparent'
   end
 )
-
-local musicNotify = require('module.music-notify')
-musicNotify()

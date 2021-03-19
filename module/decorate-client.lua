@@ -18,33 +18,22 @@ local function setupTitlebar(client)
 
   awful.titlebar(client, {
     bg_normal = '#dddddd',
-    bg_focus = '#ffffff',
-    fg = '#333333'
+    bg_focus = beautiful.primary.hue_700,
+    fg = '#333333',
+    size = 5
   }) : setup {
     { -- Left
-    awful.titlebar.widget.iconwidget(client),
-    buttons = buttons,
-    layout  = wibox.layout.fixed.horizontal
-  },
-  { -- Middle
-  { -- Title
-  align  = "center",
-  widget = awful.titlebar.widget.titlewidget(client)
-},
-buttons = buttons,
-layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-        awful.titlebar.widget.floatingbutton (client),
-        awful.titlebar.widget.maximizedbutton(client),
-        awful.titlebar.widget.stickybutton   (client),
-        awful.titlebar.widget.ontopbutton    (client),
-        awful.titlebar.widget.closebutton    (client),
-        layout = wibox.layout.fixed.horizontal()
-      },
-      layout = wibox.layout.align.horizontal
-    }
-  end
+      layout  = wibox.layout.fixed.horizontal
+    },
+    { -- Middle
+      layout  = wibox.layout.flex.horizontal
+    },
+    { -- Right
+      layout = wibox.layout.fixed.horizontal()
+    },
+    layout = wibox.layout.align.horizontal
+  }
+end
 
 local function renderClient(client, mode)
   if client.skip_decoration or (client.rendering_mode == mode) then
@@ -129,7 +118,7 @@ _G.client.connect_signal('property::hidden', clientCallback)
 _G.client.connect_signal('property::minimized', clientCallback)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
-_G.client.connect_signal("request::titlebars", setupTitlebar)
+-- _G.client.connect_signal("request::titlebars", setupTitlebar)
 
 _G.client.connect_signal(
   'property::fullscreen',

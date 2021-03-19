@@ -12,14 +12,25 @@ function poweroff_command()
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 
+local function send_string_to_client(s, c)
+  local old_c = client.focus
+  client.focus = c
+  for i=1, #s do
+    local char = s:sub(i,i)
+    root.fake_input('key_press'  , char)
+    root.fake_input('key_release', char)
+  end
+  client.focus = old_c
+end
+
 -- Key bindings
 local globalKeys =
   awful.util.table.join(
   -- Hotkeys
   awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'show help', group = 'awesome'}),
   -- Tag browsing
-  awful.key({modkey}, 'w', awful.tag.viewprev, {description = 'view previous', group = 'tag'}),
-  awful.key({modkey}, 's', awful.tag.viewnext, {description = 'view next', group = 'tag'}),
+  -- awful.key({modkey}, 'w', awful.tag.viewprev, {description = 'view previous', group = 'tag'}),
+  -- awful.key({modkey}, 's', awful.tag.viewnext, {description = 'view next', group = 'tag'}),
   awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'go back', group = 'tag'}),
   awful.key({modkey}, 'q',
     function()
@@ -95,18 +106,14 @@ local globalKeys =
     {modkey},
     'Tab',
     function()
-      --awful.client.focus.history.previous()
-      awful.client.focus.byidx(1)
-      if _G.client.focus then
-        _G.client.focus:raise()
-      end
+      awful.spawn.raise_or_spawn('skippy-xd')
     end,
     {description = 'Switch to next window', group = 'client'}
   ),
   -- Programms
   awful.key(
-    {modkey},
-    'l',
+    {'Control', modkey},
+    'q',
     function()
       awful.spawn(apps.default.lock)
     end,
@@ -139,12 +146,6 @@ local globalKeys =
     {description = 'open a terminal', group = 'launcher'}
   ),
   awful.key({modkey, 'Control'}, 'r', _G.awesome.restart, {description = 'reload awesome', group = 'awesome'}),
-  -- awful.key({modkey, 'Control'}, 'q', _G.awesome.quit, {description = 'quit awesome', group = 'awesome'}),
-  awful.key({modkey, 'Control'}, 'q',
-            function()
-                _G.exit_screen_show()
-            end,
-  {description = 'end session menu', group = 'awesome'}),
 
   -- Focus window by direction
   awful.key({modkey, 'Shift'}, 'Right',
@@ -182,7 +183,7 @@ local globalKeys =
 
   -- Move window with Mod + Arrow
   awful.key(
-    {modkey}, 'Right',
+    {modkey}, 'l',
     function()
       local c = _G.client.focus
       if c then
@@ -192,7 +193,7 @@ local globalKeys =
     {description = 'Move window right', group = 'layout'}
   ),
   awful.key(
-    {modkey}, 'Left',
+    {modkey}, 'h',
     function()
       local c = _G.client.focus
       if c then
@@ -202,7 +203,7 @@ local globalKeys =
     {description = 'Move window left', group = 'layout'}
   ),
   awful.key(
-    {modkey}, 'Up',
+    {modkey}, 'k',
     function()
       local c = _G.client.focus
       if c then
@@ -212,7 +213,7 @@ local globalKeys =
     {description = 'Move window up', group = 'layout'}
   ),
   awful.key(
-    {modkey}, 'Down',
+    {modkey}, 'j',
     function()
       local c = _G.client.focus
       if c then
@@ -224,7 +225,7 @@ local globalKeys =
 
   -- Resize window with Control + Mod + Arrow
   awful.key(
-    {'Control', modkey}, 'Right',
+    {'Control', modkey}, 'l',
     function()
       local c = _G.client.focus
       if c then
@@ -238,7 +239,7 @@ local globalKeys =
     {description = 'Resize window right', group = 'layout'}
   ),
   awful.key(
-    {'Control', modkey}, 'Left',
+    {'Control', modkey}, 'h',
     function()
       local c = _G.client.focus
       if c then
@@ -252,7 +253,7 @@ local globalKeys =
     {description = 'Resize window left', group = 'layout'}
   ),
   awful.key(
-    {'Control', modkey}, 'Up',
+    {'Control', modkey}, 'k',
     function()
       local c = _G.client.focus
       if c then
@@ -266,7 +267,7 @@ local globalKeys =
     {description = 'Resize window up', group = 'layout'}
   ),
   awful.key(
-    {'Control', modkey}, 'Down',
+    {'Control', modkey}, 'j',
     function()
       local c = _G.client.focus
       if c then
@@ -390,40 +391,6 @@ local globalKeys =
     'o',
     awful.client.movetoscreen,
     {description = 'move window to next screen', group = 'client'}
-  ),
-  -- Open default program for tag
-  awful.key(
-    {modkey},
-    'n',
-    function()
-      awful.spawn(
-          awful.screen.focused().selected_tag.defaultApp,
-          {
-            tag = _G.mouse.screen.selected_tag,
-            placement = awful.placement.bottom_right
-          }
-        )
-    end,
-    {description = 'open default program for tag/workspace', group = 'tag'}
-  ),
-  -- Custom hotkeys
-  -- vfio integration
-  awful.key(
-    {'Control',altkey},
-    'space',
-    function()
-      awful.util.spawn_with_shell('vm-attach attach')
-    end
-  ),
-  -- Emoji typing
-  -- setup info at https://gist.github.com/HikariKnight/8562837d28dec3674dba027c7892e6a5
-  awful.key(
-    {modkey},
-    'e',
-    function()
-      awful.util.spawn_with_shell('emoji-toggle')
-    end,
-    {description = 'Toggle the ibus unimoji engine for writing emojis', group = 'hotkeys'}
   )
 )
 
@@ -454,19 +421,6 @@ for i = 1, 9 do
         end
       end,
       descr_view
-    ),
-    -- Toggle tag display.
-    awful.key(
-      {modkey, 'Control'},
-      '#' .. i + 9,
-      function()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          awful.tag.viewtoggle(tag)
-        end
-      end,
-      descr_toggle
     ),
     -- Move client to tag.
     awful.key(
