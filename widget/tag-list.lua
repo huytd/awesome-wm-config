@@ -52,8 +52,8 @@ local function list_update(w, buttons, label, data, objects)
       ib = wibox.widget.imagebox()
       tb = wibox.widget.textbox()
       bgb = wibox.container.background()
-      tbm = wibox.container.margin(tb, dpi(8), dpi(8), dpi(2), dpi(2))
-      ibm = wibox.container.margin(ib, dpi(8), dpi(8), dpi(9), dpi(9))
+      tbm = wibox.container.margin(tb, dpi(6), dpi(6), dpi(2), dpi(2))
+      ibm = wibox.container.margin(ib, dpi(6), dpi(6), dpi(9), dpi(9))
       l = wibox.layout.fixed.horizontal()
       bg_clickable = clickable_container()
 
@@ -103,6 +103,7 @@ local function list_update(w, buttons, label, data, objects)
     bgb.shape = args.shape
     bgb.shape_border_width = args.shape_border_width
     bgb.shape_border_color = args.shape_border_color
+    bgb.opacity = 0.85
 
     w:add(bgb)
   end
@@ -157,7 +158,7 @@ local TagList = function(s)
     ),
     {},
     list_update,
-    wibox.layout.fixed.horizontal()
+    wibox.layout.fixed.horizontal
   )
 end
 return TagList

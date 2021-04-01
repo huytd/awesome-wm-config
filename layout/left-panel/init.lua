@@ -6,7 +6,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local gears = require('gears')
 
 local left_panel = function(screen)
-  local action_bar_width = dpi(32)
+  local initial_size = dpi(1)
   local panel_content_width = dpi(400)
 
   local panel =
@@ -15,10 +15,10 @@ local left_panel = function(screen)
     shape = function(cr, w, h)
       gears.shape.rounded_rect(cr, w, h, beautiful.border_radius)
     end,
-    width = dpi(32),
-    height = dpi(32),
-    x = screen.geometry.x + 12,
-    y = screen.geometry.y + 4,
+    width = initial_size,
+    height = initial_size,
+    x = 0,
+    y = 0,
     ontop = false,
     bg = beautiful.primary.hue_900,
     fg = beautiful.fg_normal
@@ -74,13 +74,13 @@ local left_panel = function(screen)
   end
 
   local closePanel = function()
-    panel.width = action_bar_width
-    panel.height = dpi(32)
+    panel.width = initial_size
+    panel.height = initial_size
     panel:get_children_by_id('panel_content')[1].visible = false
     backdrop.visible = false
     panel.ontop = false
-    panel.x = screen.geometry.x + 12
-    panel.y = screen.geometry.y + 4
+    panel.x = 0
+    panel.y = 0
     panel:emit_signal('closed')
   end
 
@@ -106,7 +106,6 @@ local left_panel = function(screen)
   )
 
   panel:setup {
-    require('layout.left-panel.action-bar')(screen, panel, action_bar_width),
     layout = wibox.layout.align.vertical,
     {
       id = 'panel_content',

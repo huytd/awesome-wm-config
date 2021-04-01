@@ -12,6 +12,12 @@ function poweroff_command()
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 
+local function send_key(key)
+  root.fake_input('key_press', key)
+  os.execute('sleep 0.15')
+  root.fake_input('key_release', key)
+end
+
 local function send_string_to_client(s, c)
   local old_c = client.focus
   client.focus = c
@@ -40,6 +46,23 @@ local globalKeys =
       end
     end,
     {description = 'view previous', group = 'tag'}
+  ),
+  -- arrows
+  awful.key(
+    {modkey},
+    'Left',
+    function()
+      send_key('Home')
+    end,
+    {description = 'Super Left as Home', group = 'keyboard'}
+  ),
+  awful.key(
+    {modkey},
+    'Right',
+    function()
+      send_key('End')
+    end,
+    {description = 'Super Right as End', group = 'keyboard'}
   ),
   -- Main runner
   awful.key(

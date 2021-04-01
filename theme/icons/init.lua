@@ -27,5 +27,11 @@ return {
   memory = dir .. '/memory.svg',
   harddisk = dir .. '/harddisk.svg',
   thermometer = dir .. '/thermometer.svg',
-  plus = dir .. '/plus.svg'
+  plus = dir .. '/plus.svg',
+  -- numbers
+  one = dir .. '/one.svg',
+  two = dir .. '/two.svg',
+  three = dir .. '/three.svg',
+  four = dir .. '/four.svg',
+  five = dir .. '/five.svg',
 }

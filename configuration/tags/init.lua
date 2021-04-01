@@ -5,31 +5,31 @@ local apps = require('configuration.apps')
 
 local tags = {
   {
-    icon = icons.firefox,
+    icon = icons.one,
     type = 'firefox',
     defaultApp = apps.default.browser,
     screen = 1
   },
   {
-    icon = icons.code,
+    icon = icons.two,
     type = 'code',
     defaultApp = apps.default.editor,
     screen = 1
   },
   {
-    icon = icons.folder,
+    icon = icons.three,
     type = 'files',
     defaultApp = apps.default.files,
     screen = 1
   },
   {
-    icon = icons.console,
+    icon = icons.four,
     type = 'console',
     defaultApp = apps.default.terminal,
     screen = 1
   },
   {
-    icon = icons.lab,
+    icon = icons.five,
     type = 'lab',
     defaultApp = apps.default.terminal,
     screen = 1
@@ -51,7 +51,7 @@ awful.screen.connect_for_each_screen(
           icon_only = true,
           layout = awful.layout.suit.floating,
           gap_single_client = true,
-          gap = 4,
+          gap = 0,
           screen = s,
           defaultApp = tag.defaultApp,
           selected = i == 1

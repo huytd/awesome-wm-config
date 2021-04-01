@@ -80,17 +80,7 @@ return function(_, panel)
         opacity = 0.3,
         widget = wibox.widget.separator
       },
-      require('layout.left-panel.dashboard.quick-settings'),
-      require('layout.left-panel.dashboard.hardware-monitor')
     },
-    nil,
-    {
-      layout = wibox.layout.fixed.vertical,
-      {
-        exit_button,
-        bg = beautiful.primary.hue_800,
-        widget = wibox.container.background
-      }
-    }
+    nil
   }
 end
