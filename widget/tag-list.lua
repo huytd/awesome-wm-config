@@ -103,7 +103,6 @@ local function list_update(w, buttons, label, data, objects)
     bgb.shape = args.shape
     bgb.shape_border_width = args.shape_border_width
     bgb.shape_border_color = args.shape_border_color
-    bgb.opacity = 0.85
 
     w:add(bgb)
   end
