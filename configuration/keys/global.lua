@@ -412,7 +412,16 @@ local globalKeys =
   awful.key(
     {modkey},
     'o',
-    awful.client.movetoscreen,
+    awful.placement.centered,
+    {description = 'move window to next screen', group = 'client'}
+  ),
+  awful.key(
+    {'Control', modkey},
+    'space',
+    function()
+      local f = awful.placement.centered + awful.placement.scale
+      f(client.focus, { to_percent = 0.85 })
+    end,
     {description = 'move window to next screen', group = 'client'}
   )
 )

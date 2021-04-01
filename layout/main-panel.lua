@@ -16,12 +16,43 @@ local date_box = wibox.widget.textclock('<span font="Roboto Mono bold 9">%H:%M  
 local date_widget = wibox.container.margin(date_box, dpi(8), dpi(8), dpi(8), dpi(8))
 date_box.forced_width = date_box_width
 
--- Systray
-local systray = wibox.widget.systray()
-systray:set_horizontal(true)
-systray:set_base_size(dpi(24))
-local systray_widget = wibox.container.margin(systray, dpi(8), dpi(0), dpi(8), dpi(8))
-
+-- Layout Box
+local LayoutBox = function(s)
+  local layoutBox = clickable_container(awful.widget.layoutbox(s))
+  layoutBox:buttons(
+    awful.util.table.join(
+      awful.button(
+        {},
+        1,
+        function()
+          awful.layout.inc(1)
+        end
+      ),
+      awful.button(
+        {},
+        3,
+        function()
+          awful.layout.inc(-1)
+        end
+      ),
+      awful.button(
+        {},
+        4,
+        function()
+          awful.layout.inc(1)
+        end
+      ),
+      awful.button(
+        {},
+        5,
+        function()
+          awful.layout.inc(-1)
+        end
+      )
+    )
+  )
+  return layoutBox
+end
 
 -- Render panel
 
@@ -62,7 +93,11 @@ local TopBarPanel = function(s, offset)
       layout = wibox.layout.manual,
       date_widget,
     },
-    TagList(s),
+    {
+      layout = wibox.layout.fixed.horizontal,
+      TagList(s),
+      LayoutBox(s)
+    }
   }
 
   return panel
