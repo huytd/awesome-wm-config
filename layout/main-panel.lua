@@ -4,17 +4,20 @@ local wibox = require('wibox')
 local gears = require('gears')
 local clickable_container = require('widget.material.clickable-container')
 local TaskList = require('widget.task-list')
-local TagList = require('widget.tag-list')
 
 local dpi = require('beautiful').xresources.apply_dpi
 
 local icons = require('theme.icons')
 
--- Date Widget
-local date_box_width = dpi(180)
-local date_box = wibox.widget.textclock('<span font="Roboto Mono bold 9">%H:%M  %a %m/%d/%Y</span>')
-local date_widget = wibox.container.margin(date_box, dpi(8), dpi(8), dpi(8), dpi(8))
-date_box.forced_width = date_box_width
+-- Current Screen Indicator
+local CurrentTag = function(s)
+  local box = wibox.widget.imagebox()
+  s:connect_signal("tag::history::update", function()
+    local index = awful.tag.selected(1)
+    box.image = index.icon
+  end)
+  return wibox.container.margin(box, dpi(8), dpi(8), dpi(8), dpi(8))
+end
 
 -- Layout Box
 local LayoutBox = function(s)
@@ -81,21 +84,22 @@ local TopBarPanel = function(s, offset)
     }
   )
 
-  date_widget.point = {
-    x = s.geometry.width / 2 - date_box_width,
-    y = dpi(0)
-  }
+  local tagIcon = CurrentTag(s)
+  local taskList = TaskList(s)
 
   panel:setup {
     layout = wibox.layout.align.horizontal,
-    TaskList(s),
     {
-      layout = wibox.layout.manual,
-      date_widget,
+      layout = wibox.layout.fixed.horizontal,
+      tagIcon,
+      taskList
     },
     {
       layout = wibox.layout.fixed.horizontal,
-      TagList(s),
+      nil
+    },
+    {
+      layout = wibox.layout.fixed.horizontal,
       LayoutBox(s)
     }
   }
