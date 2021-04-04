@@ -13,6 +13,7 @@ local dpi = require('beautiful').xresources.apply_dpi
 local icons = require('theme.icons')
 
 -- Date Widget
+local date_box_width = dpi(180)
 local date_box = wibox.widget.textclock('<span font="Roboto Mono bold 9">%H:%M  %a %m/%d/%Y</span>')
 local date_widget = wibox.container.margin(date_box, dpi(8), dpi(8), dpi(8), dpi(8))
 
@@ -24,8 +25,8 @@ local ClockPanel = function(s, offset)
       screen = s,
       type = "dock",
       height = dpi(32),
-      width = dpi(160),
-      x = s.geometry.width / 2 - dpi(80),
+      width = date_box_width,
+      x = s.geometry.width / 2 - date_box_width / 2,
       y = dpi(0),
       stretch = false,
       bg = 'transparent',

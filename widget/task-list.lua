@@ -3,8 +3,9 @@ local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
 local capi = {button = _G.button}
 local gears = require('gears')
+local icons = require('theme.icons')
 local clickable_container = require('widget.material.clickable-container')
-local tasklist_mode = 'icon'        --anything else = text
+local tasklist_mode = 'text'        -- icon or text
 local tasklist_close = false
 --- Common method to create buttons.
 -- @tab buttons
@@ -57,11 +58,7 @@ local function list_update(w, buttons, label, data, objects)
       cb =
         clickable_container(
         wibox.container.margin(
-          wibox.widget.imagebox(os.getenv('HOME') .. '/.config/awesome/theme/icons/tag-list/tag/close.png'),
-          4,
-          4,
-          4,
-          4
+          wibox.widget.imagebox(icons.close)
         )
       )
       cb.shape = gears.shape.circle
