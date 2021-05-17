@@ -35,7 +35,7 @@ local awesome_overrides =
   theme.bat_fg_critical = '#232323'
 
   theme.bg_normal = theme.primary.hue_900
-  theme.bg_focus = '#5a5a5a'
+  theme.bg_focus = '#000000'
   theme.bg_urgent = '#3F3F3F'
   theme.bg_systray = theme.primary.hue_900
 

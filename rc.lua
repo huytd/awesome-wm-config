@@ -2,6 +2,7 @@ local gears = require('gears')
 local awful = require('awful')
 require('awful.autofocus')
 local beautiful = require('beautiful')
+local nice = require('nice')
 
 -- Theme
 beautiful.init(require('theme'))
@@ -52,3 +53,11 @@ _G.client.connect_signal(
     c.border_color = 'transparent'
   end
 )
+
+nice {
+  titlebar_items = {
+    left = { "close", "minimize", "maximize" },
+    middle = "title",
+    right = {}
+  }
+}

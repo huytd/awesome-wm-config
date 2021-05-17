@@ -28,13 +28,15 @@ awful.rules.rules = {
 
   -- Add titlebars to normal clients and dialogs
   { rule_any = {type = { "normal", "dialog" }
-    }, properties = { titlebars_enabled = true }
+    }, properties = {
+      titlebars_enabled = true
+    }
   },
 
   -- Ignore title bar for Alacritty
-  { rule_any = { name = { "Alacritty" }
-    }, properties = { titlebars_enabled = false }
-  },
+  -- { rule_any = { name = { "Alacritty" }
+    -- }, properties = { titlebars_enabled = false }
+  -- },
 
   -- No decoratio for Conky
   { rule_any = { name = { "conky" }

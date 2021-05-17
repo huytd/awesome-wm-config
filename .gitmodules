@@ -1,0 +1,3 @@
+[submodule "nice"]
+	path = nice
+	url = https://github.com/mut-ex/awesome-wm-nice

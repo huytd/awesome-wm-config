@@ -2,37 +2,51 @@ local awful = require('awful')
 local gears = require('gears')
 local beautiful = require('beautiful')
 local wibox = require("wibox")
+local dpi = require('beautiful').xresources.apply_dpi
 
-local function setupTitlebar(client)
-  -- buttons for the titlebar
-  local buttons = gears.table.join(
-  awful.button({ }, 1, function()
-    client:emit_signal("request::activate", "titlebar", {raise = true})
-    awful.mouse.client.move(client)
-  end),
-  awful.button({ }, 3, function()
-    client:emit_signal("request::activate", "titlebar", {raise = true})
-    awful.mouse.client.resize(client)
-  end)
-  )
+local function setupTitlebar(c)
+  -- Code to create your titlebar here
+  local titlebars_enabled = true
+  if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
+    -- buttons for the titlebar
+    local buttons = awful.util.table.join(
+    awful.button({ }, 1, function()
+      client.focus = c
+      c:raise()
+      awful.mouse.client.move(c)
+    end),
+    awful.button({ }, 3, function()
+      client.focus = c
+      c:raise()
+      awful.mouse.client.resize(c)
+    end)
+    )
 
-  awful.titlebar(client, {
-    bg_normal = '#dddddd',
-    bg_focus = beautiful.primary.hue_700,
-    fg = '#333333',
-    size = 5
-  }) : setup {
-    { -- Left
-      layout  = wibox.layout.fixed.horizontal
-    },
-    { -- Middle
-      layout  = wibox.layout.flex.horizontal
-    },
-    { -- Right
-      layout = wibox.layout.fixed.horizontal()
-    },
-    layout = wibox.layout.align.horizontal
-  }
+    awful.titlebar(c, {size = dpi(24)}) : setup {
+      { -- Left
+        awful.titlebar.widget.iconwidget(c),
+        buttons = buttons,
+        layout  = wibox.layout.fixed.horizontal
+      },
+      { -- Middle
+        { -- Title
+          align  = "center",
+          widget = awful.titlebar.widget.titlewidget(c)
+        },
+        buttons = buttons,
+        layout  = wibox.layout.flex.horizontal
+      },
+      { -- Right
+        awful.titlebar.widget.floatingbutton (c),
+        awful.titlebar.widget.maximizedbutton(c),
+        awful.titlebar.widget.stickybutton   (c),
+        awful.titlebar.widget.ontopbutton    (c),
+        awful.titlebar.widget.closebutton    (c),
+        layout = wibox.layout.fixed.horizontal()
+      },
+      layout = wibox.layout.align.horizontal
+    }
+  end
 end
 
 local function renderClient(client, mode)
@@ -87,9 +101,9 @@ function clientCallback(client)
       changesOnScreenCalled = true
       local screen = client.screen
       gears.timer.delayed_call(
-        function()
-          changesOnScreen(screen)
-        end
+      function()
+        changesOnScreen(screen)
+      end
       )
     end
   end
@@ -101,9 +115,9 @@ function tagCallback(tag)
       changesOnScreenCalled = true
       local screen = tag.screen
       gears.timer.delayed_call(
-        function()
-          changesOnScreen(screen)
-        end
+      function()
+        changesOnScreen(screen)
+      end
       )
     end
   end
@@ -121,14 +135,14 @@ _G.client.connect_signal('property::minimized', clientCallback)
 -- _G.client.connect_signal("request::titlebars", setupTitlebar)
 
 _G.client.connect_signal(
-  'property::fullscreen',
-  function(c)
-    if c.fullscreen then
-      renderClient(c, 'maximized')
-    else
-      clientCallback(c)
-    end
+'property::fullscreen',
+function(c)
+  if c.fullscreen then
+    renderClient(c, 'maximized')
+  else
+    clientCallback(c)
   end
+end
 )
 
 _G.tag.connect_signal('property::selected', tagCallback)
